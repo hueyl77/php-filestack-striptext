@@ -1,8 +1,11 @@
 <?php
-$file_url = isset($_REQUEST['file_url']) ? $_REQUEST['file_url'] : 'https://cdn.filestackcontent.com/Rs0SHAecRwWcX8NEO90F';
+$file_url = isset($_REQUEST['file_url']) ? $_REQUEST['file_url'] : null;
+
+if (!$file_url) {
+  die('Missing param: file_url');
+}
 
 $temp_filepath = __DIR__ . "/test-docs/tempfile.doc";
-echo $temp_filepath;
 file_put_contents($temp_filepath, fopen($file_url, 'r'));
 
 function docx2text($filename) {
